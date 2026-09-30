@@ -2,9 +2,9 @@ from conftest import browser
 
 
 class BasePage():
-    def __init__(self, url, browser):
+    def __init__(self,browser,url):
         self.browser = browser
         self.url = url
 
-        def open(self):
-            self.browser.get(self.url)
+    def open(self):
+        self.browser.get(self.url)
