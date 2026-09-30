@@ -16,7 +16,7 @@ def test_guest_can_go_to_login_page(browser):
     browser.find_element(*MainPageLocators.LOGIN_LINK).click()
 
 
-    login_page = LoginPage(browser,link)
+    login_page = LoginPage(browser,browser.current_url)
     wait=WebDriverWait(browser,10)
 
     wait.until(EC.visibility_of_element_located(LoginPageLocators.LOGIN_FORM))
