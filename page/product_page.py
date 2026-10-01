@@ -16,7 +16,7 @@ class ProductPage(BasePage):
     def should_be_correct_product_name_in_message(self ):
         product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
         message_name = self.browser.find_element(*ProductPageLocators.SUCCESS_MESSAGE).text
-        assert product_name == message_name, f'Несоответствие: название товара {product_name}, сообщение об успешном добавление {message_name}'
+        assert product_name == message_name, f'Несоответствие: название товара {product_name} в сообщении об успешном добавлении {message_name}'
     #проверка наличия стоимости корзины
     def should_be_basket_total_message(self):
         assert self.is_element_present(*ProductPageLocators.BASKET_TOTAL_MESSAGE),'Стоимость корзины не отображается'
