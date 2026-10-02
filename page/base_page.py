@@ -6,6 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from conftest import browser
+from page.locators import MainPageLocators
 
 
 class BasePage():
@@ -17,6 +18,12 @@ class BasePage():
     def open(self):
         self.browser.get(self.url)
 
+    def go_to_login_page(self):
+        link = self.browser.find_element(*MainPageLocators.LOGIN_LINK)
+        link.click()
+
+    def should_be_login_link(self):
+        self.is_element_present(*MainPageLocators.LOGIN_LINK,error_message= "Ссылка для входа отсутствует")
 
     def get_element(self, how, what):
         return self.browser.find_element(by=how,value=what)
