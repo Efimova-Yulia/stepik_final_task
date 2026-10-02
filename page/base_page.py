@@ -6,7 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from conftest import browser
-from page.locators import MainPageLocators
+from page.locators import MainPageLocators, ProductPageLocators
 
 
 class BasePage():
@@ -57,4 +57,14 @@ class BasePage():
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
+
+
+    def go_to_basket_page(self):
+        link = self.browser.find_element(*MainPageLocators.BUTTON_BASKET)
+        link.click()
+
+
+
+
+
 

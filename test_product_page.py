@@ -1,6 +1,7 @@
 import pytest
 
-from page.locators import ProductPageLocators
+from page.basket_page import BasketPage
+from page.locators import ProductPageLocators, MainPageLocators
 from page.login_page import LoginPage
 from page.main_page import MainPage
 from page.product_page import ProductPage
@@ -57,6 +58,16 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
     page.go_to_login_page()
     login_page = LoginPage(browser, browser.current_url)
     login_page.should_be_login_form()
+
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/ru/catalogue/the-shellcoders-handbook_209/"
+    page = MainPage(browser, link)
+    basket_page = BasketPage(browser, link)
+    page.open()
+    page.go_to_basket_page()
+    basket_page.should_be_empty_basket()
+
+
 
 
 

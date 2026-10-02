@@ -4,6 +4,8 @@ class MainPageLocators():
 
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+    BUTTON_BASKET = (By.CSS_SELECTOR, "a[href='/ru/basket/']")
+    EMPTY_BASKET_MESSAGE = (By.XPATH, "//p[contains(text(), 'Ваша корзина пуста')]")
 
 class LoginPageLocators():
     LOGIN_FORM = (By.CSS_SELECTOR, "#login_form")
