@@ -1,6 +1,10 @@
 import math
+
 from selenium.common import NoSuchElementException
-from selenium.common.exceptions import NoAlertPresentException
+from selenium.common.exceptions import NoAlertPresentException, TimeoutException
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 from conftest import browser
 
 
@@ -13,12 +17,25 @@ class BasePage():
     def open(self):
         self.browser.get(self.url)
 
-    def is_element_present(self,how,what):
+
+    def get_element(self, how, what):
+        return self.browser.find_element(by=how,value=what)
+
+
+    def is_element_present(self, how, what,error_message, timeout=4):
         try:
-            self.browser.find_element(by=how,value=what)
-        except NoSuchElementException:
-            return False
-        return True
+            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            raise AssertionError(error_message)
+
+
+    def is_element_not_present(self, how, what, error_message, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout, 1, TimeoutException).until_not(
+                EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            raise AssertionError(error_message)
+
 
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
